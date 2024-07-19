@@ -7,7 +7,7 @@ export default function LoginSignUp ()  {
   return (
     <div className='container' >
       
-      <h1 style={{ color: '#2196f3' }}>
+      <h1 style={{ color: '#2196f3' width: '300'}}>
         Weather App
       </h1>
       <img className='bck' src={img} />
