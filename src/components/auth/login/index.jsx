@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Navigate, Link } from 'react-router-dom'
-import { doSignInWithEmailAndPassword } from '../../../firebase/auth'
+import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../../../firebase/auth'
 import { useAuth } from '../../../index.jsx'
 
 const Login = () => {
@@ -26,14 +26,15 @@ const Login = () => {
         }
     }
 
-    const onCustomSignIn = (e) => {
-        e.preventDefault()
+    const onGoogleSignIn = async () => {
         if (!isSigningIn) {
             setIsSigningIn(true)
-            customSignInFunction().catch((error) => {
+            try {
+                await doSignInWithGoogle()
+            } catch (error) {
                 setIsSigningIn(false)
                 setErrorMessage(getErrorMessage(error))
-            })
+            }
         }
     }
 
@@ -49,34 +50,6 @@ const Login = () => {
         } else {
             return 'An unknown error occurred.'
         }
-    }
-
-    const customSignInFunction = () => {
-        return new Promise((resolve, reject) => {
-            const apiUrl = 'https://your-custom-auth-api.com/signin';
-            const formData = new FormData();
-            formData.append('username', email);
-            formData.append('password', password);
-
-            fetch(apiUrl, {
-                method: 'POST',
-                body: formData,
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Authentication successful, return the user data
-                        resolve(data.user);
-                    } else {
-                        // Authentication failed, return an error message
-                        reject(new Error(data.error));
-                    }
-                })
-                .catch(error => {
-                    // Network error, return an error message
-                    reject(new Error('Network error'));
-                });
-        });
     }
 
     return (
@@ -139,15 +112,5 @@ const Login = () => {
                     </div>
                     <button
                         disabled={isSigningIn}
-                        onClick={(e) => { onCustomSignIn(e) }}
-                        className={`w-full flex items-center justify-center gap-x-2 py-2 text-white font-medium rounded-lg ${isSigningIn? 'bg-gray-300 cursor-not-allowed' : 'bg-orange-600 hover:bg-orange-700 hover:shadow-xl transition duration-300'}`}
-                    >
-                        Custom Sign In
-                    </button>
-                </div>
-            </main>
-        </div>
-    )
-}
-
-export default Login
+                        onClick={onGoogleSignIn}
+                        className={`w-full flex items-center justify-center gap-x-2 py-2 text-white font-medium rounded-lg ${isSigningIn? 'bg-gray-300
