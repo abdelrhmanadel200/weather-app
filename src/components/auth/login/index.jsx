@@ -1,8 +1,18 @@
 import React, { useState } from 'react'
 import { Navigate, Link } from 'react-router-dom'
-import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../../../firebase/auth'
+import { doSignInWithEmailAndPassword } from '../../../firebase/auth'
 import { useAuth } from '../../../index.jsx'
-
+const doSignInWithGoogle = async () => {
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    // Handle the signed-in user
+  } catch (error) {
+    // Handle the error
+  }
+};
 const Login = () => {
     const { userLoggedIn } = useAuth()
 
