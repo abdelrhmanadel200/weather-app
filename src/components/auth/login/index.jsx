@@ -36,19 +36,7 @@ const Login = () => {
         }
     }
 
-    const getErrorMessage = (error) => {
-        if (error.code === 'auth/invalid-email') {
-            return 'Invalid email address.'
-        } else if (error.code === 'auth/wrong-password') {
-            return 'Incorrect password.'
-        } else if (error.code === 'auth/user-not-found') {
-            return 'User not found.'
-        } else if (error.code === 'auth/weak-password') {
-            return 'Password should be at least 6 characters.'
-        } else {
-            return 'An unknown error occurred.'
-        }
-    }
+  
 
 
     return (
