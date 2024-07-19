@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Navigate, Link } from 'react-router-dom'
 import { doSignInWithEmailAndPassword } from '../../../firebase/auth'
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuth } from '../../../index.jsx'
 const doSignInWithGoogle = async () => {
     const auth = getAuth();
