@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Navigate, Link } from 'react-router-dom'
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../../../firebase/auth'
 import { useAuth } from '../../../index.jsx'
-
+import { TextField } from '@mui/material';
 const Login = () => {
     const { userLoggedIn } = useAuth()
 
@@ -15,7 +15,7 @@ const Login = () => {
         e.preventDefault()
         if (!isSigningIn) {
             setIsSigningIn(true)
-            
+
             try {
                 await doSignInWithEmailAndPassword(email, password)
                 // doSendEmailVerification()
@@ -47,7 +47,7 @@ const Login = () => {
         } else if (error.code === 'auth/weak-password') {
             return 'Password should be at least 6 characters.'
         } else {
-            return 'An unknown error occurred.'
+            return 'Invalid email address or Password'
         }
     }
 
@@ -68,32 +68,32 @@ const Login = () => {
                         className="space-y-5"
                     >
                         <div>
-                            <label className="text-sm text-gray-600 font-bold">
-                                Email
-                            </label>
-                            <input
+                            <TextField
+                                label="Email"
                                 type="email"
-                                autoComplete='email'
-                                required
-                                value={email} onChange={(e) => { setEmail(e.target.value) }}
-                                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
+                                autoComplete="email"
+                                
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                variant="outlined"
+                                size="small"
+                                fullWidth
                             />
                         </div>
-
 
                         <div>
-                            <label className="text-sm text-gray-600 font-bold">
-                                Password
-                            </label>
-                            <input
+                            <TextField
+                                label="Password"
                                 type="password"
-                                autoComplete='current-password'
-                                required
-                                value={password} onChange={(e) => { setPassword(e.target.value) }}
-                                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
+                                autoComplete="current-password"
+                                
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                variant="outlined"
+                                size="small"
+                                fullWidth
                             />
                         </div>
-
                         {errorMessage && (
                             <span className='text-red-600 font-bold'>{errorMessage}</span>
                         )}
@@ -106,14 +106,14 @@ const Login = () => {
                             {isSigningIn ? 'Signing In...' : 'Sign In'}
                         </button>
                     </form>
-                    <p className="text-center text-sm" >Don't have an account? <Link to={'/register'} className="hover:underline font-bold" style={{color: "#000000"}}>Sign up</Link></p>
+                    <p className="text-center text-sm" >Don't have an account? <Link to={'/register'} className="hover:underline font-bold" style={{ color: "#000000" }}>Sign up</Link></p>
                     <div className='flex flex-row text-center w-full'>
                         <div className='border-b-2 mb-2.5 mr-2 w-full'></div><div className='text-sm font-bold w-fit'>OR</div><div className='border-b-2 mb-2.5 ml-2 w-full'></div>
                     </div>
                     <button
                         disabled={isSigningIn}
                         onClick={(e) => { onGoogleSignIn(e) }}
-                        className={`w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg text-sm font-medium  ${isSigningIn ? 'cursor-not-allowed' : 'hover:bg-gray-100 transition duration-300 active:bg-gray-100'}`}>
+                        className={`w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg text-sm font-medium text-black bg-gray-600 hover:text-white hover:bg-black shadow-md transition duration-300 hover:translate-x-1 ${isSigningIn ? 'cursor-not-allowed' : ''}`}>
                         <svg className="w-5 h-5" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_17_40)">
                                 <path d="M47.532 24.5528C47.532 22.9214 47.3997 21.2811 47.1175 19.6761H24.48V28.9181H37.4434C36.9055 31.8988 35.177 34.5356 32.6461 36.2111V42.2078H40.3801C44.9217 38.0278 47.532 31.8547 47.532 24.5528Z" fill="#4285F4" />
