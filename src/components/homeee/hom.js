@@ -3,19 +3,17 @@ import { Link } from 'react-router-dom';
 import './LoginSignUp.css';
 import img from './bck.jpg';
 
-import { Button ,Typography} from '@mui/material';
-
 export default function LoginSignUp ()  {
   return (
     <div className='container' >
       
-      <Typography variant='h2' color={"primary"} >
-       Weather App
-      </Typography>
-      <img className='bck' src={img} ></img>
+      <h2 style={{ color: '#2196f3' }}>
+        Weather App
+      </h2>
+      <img className='bck' src={img} />
       <p>Please login or sign up to access the weather app</p>
-      <Button className='login' variant="contained" color="primary" style={{ marginRight: 70 }}><Link  to={"login"}>Login</Link></Button>
-      <Button className='signup' variant="contained" color="secondary" style={{ backgroundColor: '#000000'}}><Link  to={"Register"}>Sign up</Link></Button>
+      <button className='login' style={{ marginRight: 70, backgroundColor: '#2196f3', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px' }}><Link to={"login"}>Login</Link></button>
+      <button className='signup' style={{ backgroundColor: '#000000', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px' }}><Link to={"Register"}>Sign up</Link></button>
     </div>
   );
 }
