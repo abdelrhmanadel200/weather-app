@@ -4,7 +4,7 @@ import Register from "./components/auth/register";
 import Header from "./components/header";
 import Home from "./components/home";
 import Ho from "./components/homeee/hom"
-import { AuthProvider } from "./contexts/authContext";
+import { AuthProvider } from "./index.jsx";
 import { useRoutes } from "react-router-dom";
 
 function App() {
