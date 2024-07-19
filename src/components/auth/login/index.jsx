@@ -1,21 +1,8 @@
 import React, { useState } from 'react'
 import { Navigate, Link } from 'react-router-dom'
-import { doSignInWithEmailAndPassword } from '../../../firebase/auth'
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../../../firebase/auth'
 import { useAuth } from '../../../index.jsx'
-const doSignInWithGoogle = async () => {
-  try {
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
-    console.log('Signed in with Google:', user);
-    // Handle the signed-in user
-  } catch (error) {
-    console.error('Error signing in with Google:', error);
-    // Handle the error
-  }
-};
+
 const Login = () => {
     const { userLoggedIn } = useAuth()
 
@@ -39,13 +26,12 @@ const Login = () => {
         }
     }
 
-    const onGoogleSignIn = (e) => {
+     const onGoogleSignIn = (e) => {
         e.preventDefault()
         if (!isSigningIn) {
             setIsSigningIn(true)
-            doSignInWithGoogle().catch((error) => {
+            doSignInWithGoogle().catch(err => {
                 setIsSigningIn(false)
-                setErrorMessage(getErrorMessage(error))
             })
         }
     }
