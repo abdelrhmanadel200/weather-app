@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './LoginSignUp.css';
 import img from './bck.jpg';
 
 export default function LoginSignUp ()  {
   return (
     <div className='container' >
       
-      <h1 style={{ color: '#2196f3' , font-size: '36' , width: '300'}}>
+      <h1 style={{ fontSize: 36, color: '#2196f3', width: 300 }}>
         Weather App
       </h1>
       <img className='bck' src={img} />
