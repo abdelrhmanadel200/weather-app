@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Navigate, Link } from 'react-router-dom'
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../../../firebase/auth'
-import { useAuth } from '../../../index.jsx'
+import { useAuth } from '../../../contexts/authContext'
 
 const Login = () => {
     const { userLoggedIn } = useAuth()
@@ -13,20 +13,14 @@ const Login = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        if (!isSigningIn) {
+        if(!isSigningIn) {
             setIsSigningIn(true)
-            
-            try {
-                await doSignInWithEmailAndPassword(email, password)
-                // doSendEmailVerification()
-            } catch (error) {
-                setIsSigningIn(false)
-                setErrorMessage(getErrorMessage(error))
-            }
+            await doSignInWithEmailAndPassword(email, password)
+            // doSendEmailVerification()
         }
     }
 
-     const onGoogleSignIn = (e) => {
+    const onGoogleSignIn = (e) => {
         e.preventDefault()
         if (!isSigningIn) {
             setIsSigningIn(true)
@@ -35,9 +29,6 @@ const Login = () => {
             })
         }
     }
-
-  
-
 
     return (
         <div>
@@ -93,7 +84,7 @@ const Login = () => {
                             {isSigningIn ? 'Signing In...' : 'Sign In'}
                         </button>
                     </form>
-                    <p className="text-center text-sm" >Don't have an account? <Link to={'/register'} className="hover:underline font-bold" style={{color: "#000000"}}>Sign up</Link></p>
+                    <p className="text-center text-sm">Don't have an account? <Link to={'/register'} className="hover:underline font-bold">Sign up</Link></p>
                     <div className='flex flex-row text-center w-full'>
                         <div className='border-b-2 mb-2.5 mr-2 w-full'></div><div className='text-sm font-bold w-fit'>OR</div><div className='border-b-2 mb-2.5 ml-2 w-full'></div>
                     </div>
@@ -110,7 +101,7 @@ const Login = () => {
                             </g>
                             <defs>
                                 <clipPath id="clip0_17_40">
-                                    <rect width="48" height="48" fill="black" />
+                                    <rect width="48" height="48" fill="white" />
                                 </clipPath>
                             </defs>
                         </svg>
