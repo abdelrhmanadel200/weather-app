@@ -8,7 +8,7 @@ const SearchBar = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     const API_KEY = 'c50cfa3c829efcd1294a3f02ca1b0983'; // Replace with your API key
-    const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
     try {
       const response = await axios.get(url);
       setWeatherData(response.data);
