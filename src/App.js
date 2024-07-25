@@ -6,6 +6,7 @@ import Home from "./components/home";
 import Ho from "./components/homeee/hom"
 import { AuthProvider } from "./index.jsx";
 import { useRoutes } from "react-router-dom";
+import SearchBar from './SearchBar';
 
 function App() {
   const routesArray = [
